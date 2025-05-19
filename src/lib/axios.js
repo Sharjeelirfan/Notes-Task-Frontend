@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "http://localhost:4000",
+  baseURL: "https://notes-task-backend.vercel.app",
   //   withCredentials: true,
 });
 
@@ -25,7 +25,7 @@ api.interceptors.response.use(
 
       try {
         const res = await axios.post(
-          `http://localhost:4000/refresh-token`,
+          `https://notes-task-backend.vercel.app/refresh-token`,
           {},
           { withCredentials: true }
         );
