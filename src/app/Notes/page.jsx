@@ -7,14 +7,14 @@ import { useAuth } from "@/context/AuthContext";
 
 export default function NotesPage() {
   const [notes, setNotes] = useState([]);
-  const [notesLoading, setNotesLoading] = useState(true); // renamed to avoid conflict
-  const { user, loading } = useAuth(); // loading here is for auth state
+  const [notesLoading, setNotesLoading] = useState(true);
+  const { user, loading, logout } = useAuth(); // logout added
   const router = useRouter();
 
   // Redirect to login if not authenticated
   useEffect(() => {
     if (!loading && !user) {
-      router.push("/Login");
+      router.push("/login");
     }
   }, [user, loading]);
 
@@ -35,18 +35,27 @@ export default function NotesPage() {
   }, []);
 
   if (loading || notesLoading) return <p>Loading notes...</p>;
-
   if (!user) return <p>Redirecting to login...</p>;
 
   return (
     <div className="space-y-4">
       <div className="flex justify-between items-center">
         <h1 className="text-2xl font-bold mb-4">My Notes</h1>
-        <Link href="/Notes/Add">
-          <button className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition">
-            Add Note
+
+        <div className="flex items-center gap-2">
+          <Link href="/Notes/Add">
+            <button className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition">
+              Add Note
+            </button>
+          </Link>
+
+          <button
+            onClick={logout}
+            className="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700 transition"
+          >
+            Logout
           </button>
-        </Link>
+        </div>
       </div>
 
       {notes.length === 0 ? (

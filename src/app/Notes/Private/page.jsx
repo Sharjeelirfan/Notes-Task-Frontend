@@ -13,7 +13,7 @@ const PrivateNotesPage = () => {
 
   useEffect(() => {
     if (!loading && !user) {
-      router.push("/Login");
+      router.push("/login");
     }
   }, [user, loading]);
   //   console.log(user.token);

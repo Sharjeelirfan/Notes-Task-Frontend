@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "https://notes-task-backend.vercel.app",
+  baseURL: "http://localhost:4000",
   //   withCredentials: true,
 });
 
@@ -25,7 +25,7 @@ api.interceptors.response.use(
 
       try {
         const res = await axios.post(
-          `https://notes-task-backend.vercel.app/refresh-token`,
+          `http://localhost:4000/refresh-token`,
           {},
           { withCredentials: false }
         );
@@ -38,7 +38,7 @@ api.interceptors.response.use(
         return api(originalRequest);
       } catch (refreshError) {
         localStorage.removeItem("accessToken");
-        window.location.href = "/Login";
+        window.location.href = "/login";
         return Promise.reject(refreshError);
       }
     }
