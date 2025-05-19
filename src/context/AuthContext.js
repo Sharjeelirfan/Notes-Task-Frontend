@@ -50,7 +50,7 @@ export const AuthProvider = ({ children }) => {
   const logout = () => {
     localStorage.removeItem("accessToken");
     setUser(null);
-    router.push("/login");
+    router.push("/Login");
   };
 
   return (

@@ -14,7 +14,7 @@ export default function NotesPage() {
   // Redirect to login if not authenticated
   useEffect(() => {
     if (!loading && !user) {
-      router.push("/login");
+      router.push("/Login");
     }
   }, [user, loading]);
 
