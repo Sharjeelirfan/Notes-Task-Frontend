@@ -1,6 +1,6 @@
 import React from "react";
 import RegisterPage from "./Register/page";
-import LoginPage from "./login/page";
+import LoginPage from "./Login/page";
 
 function page() {
   return (
