@@ -2,7 +2,7 @@ import axios from "axios";
 
 const api = axios.create({
   baseURL: "https://notes-task-backend.vercel.app",
-  //   withCredentials: true,
+    withCredentials: true,
 });
 
 api.interceptors.request.use((config) => {
@@ -30,17 +30,13 @@ api.interceptors.response.use(
           { withCredentials: true }
         );
 
-        // Naya access token le kar localStorage me set karo
         const newToken = res.data.accessToken;
         localStorage.setItem("accessToken", newToken);
 
-        // Original request headers me naya token set karo
         originalRequest.headers.Authorization = `Bearer ${newToken}`;
 
-        // Original request ko dobara chalao
         return api(originalRequest);
       } catch (refreshError) {
-        // Agar refresh token bhi expire ho gaya, to user ko logout karo
         localStorage.removeItem("accessToken");
         window.location.href = "/Login";
         return Promise.reject(refreshError);
